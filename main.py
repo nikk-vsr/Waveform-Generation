@@ -1,4 +1,5 @@
 import Waveformplotting
+#import ScrollWaveformPlot
 
 #Sample inputdata is given, so you can selet any of these to check
 
@@ -53,4 +54,5 @@ inputdata=[["Set", "KL30",1, "","Set KL30 to 1", ""],["Set","KL15",1, "","Set KL
 [["Set","MO_EM1_SollModus",0,"","Set Mo_EM1Sollmodus to 0",""],["Set", "KL15",0,"","Set KL15 to 0", ""],["Wait","",3,"","Wait for 3 secs", ""]]
 [["Set","SOLLMOMENT",-100,"Nm","set sollmoment to -100",""],["Wait","",1,"","Wait for 1 secs", ""]]
 '''
-Waveformplotting.Plot_Data("trqcntrl","T.1",inputdata)  
+Waveformplotting.Plot_Data("trqcntrl","T.1",inputdata) 
+#ScrollWaveformplot.Plot_Data("trqcntrl","T.1",inputdata)  # to get the scroll bar in the 1D waveform 
