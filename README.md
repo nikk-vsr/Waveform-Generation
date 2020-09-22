@@ -3,6 +3,8 @@ Generating Waveform from the test input data given in dictionary format in pytho
 
 Matplotlib library is used to generate waveoform.
 
+All programs has to be in same folder.
+
 #Sample Input data of a test case. 
 #Each element of inputdata represents a action in it.
 
@@ -16,3 +18,4 @@ inputdata[2]= [['Set', 'KL45', 1.0, '', '', ''], ['Wait', '', 1.0, '', '', '']]-
 
 --> input data can be changed in main() function.
 --> Run main() function to get the output.
+
