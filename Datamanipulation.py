@@ -1,36 +1,6 @@
 import math
 import GlobalVar as G
 
-'''
-G.Actions[0]=[["Set", "KL30",1, "","Set KL30 to 1", ""],["Set","KL15",1, "","Set KL15 to 1", ""],["Wait","",3,"","Wait for 3 secs", ""]]
-G.Actions[1]=[["Set", "HVDC",380,"V","Set HVDC to 380",""],["Wait","",3,"","Wait for 3 secs", ""],["Set","MO_EM1_SollModus",1,"","Set Mo_EM1 Sollmodus to 1",""],["Wait","",3,"Wait for 3 secs", ""]]
-G.Actions[2]=[["Set","MO_EM1_SollModus",0,"","Set Mo_EM1Sollmodus to 0",""],["Wait","",3,"Wait for 3 secs", ""]]
-G.Actions[3]=[["Set","MO_EM1_SollModus",1,"","Set Mo_EM1Sollmodus to 1",""],["Set", "KL15",0,"","Set KL15 to 0", ""],["Set","Rotortemp",50,"DegC","Set rotor temp to 50",""] ,["Wait","",3,"","Wait for 3 secs", ""]]
-G.Actions[4]=[["Ramp","SOLLMOMENT",[-40,100,20],"Nm","Ramp Sollmoment from 0 to 100 in 20",1], ["Wait","",2,"","Wait for 2 secs", ""],["Set","MOMENT",3000,"Nm","set moment to 3000",""],["Wait","",2,"","Wait for 2 secs", ""]]          #test case- ramp signal is first finding
-G.Actions[5]=[["Set","KL15",0,"","Set KL15 to 0",""],["Wait","",2,"Wait for 2 secs", ""]]
-G.Actions[6]=[["Set","Speed",10,"rpm","Set speed to 10",""], ["Set","IGBTtemp",-10,"DegC","Set IGBT temp to 10"],["Set","Vbatt",12,"V","Set Vbatt to 12",""],["Wait","",2,"Wait for 2 secs", ""]]  
-G.Actions[7]=[["Ramp","StatorTemp",[20,100,20], "DegC", "Ramp stator temp from 20 to 100 in 20 ",1 ],["Set","coolanttemp",-20,"DegC","Set coolant temp to 20",""],["Set","Speed",30,"rpm","Set speed to 30",""],["Wait","",2,"Wait for 2 secs", ""]]  # resolved: limitation that last action should not be new signal
-G.Actions[8]=[["Set","Rotortemp",100,"DegC","Set rotor temp to 100", ""], ["Set","IGBTtemp",20,"DegC","Set IGBT temp to 10"], ["Set","coolanttemp",20,"DegC","Set coolant temp to 20",""],["Wait","",2,"Wait for 2 secs", ""]]     
-.Actions[9]=[["Set","Flowrate",10,"L/min","Set Flowrate to 10",""],["Wait","",2,"Wait for 2 secs", ""]]
-#G.Actions[10]=[["Set","coolantrate",50,"L/min","Set coolantrate to 50",""],["Wait","",2,"Wait for 2 secs", ""]]
-#G.Actions[11]=[["Set","rate",15,"L/min","Set coolantrate to 50",""],["Wait","",2,"Wait for 2 secs", ""]]
-#G.Actions[12]=[["Set","coolavxxcvntrate",50,"L/min","Set coolantrate to 50",""],["Wait","",2,"Wait for 2 secs", ""]]
-#G.Actions[13]=[["Set","raxvxcvcte",15,"L/min","Set coolantrate to 50",""],["Wait","",2,"Wait for 2 secs", ""]]
-'''
-#['Ramp', 'HV_Bench_Battery_Voltage.abc', '700,750,10', '', '', 0.2]
-
-'''
-G.Actions[0]=[['Set', 'KL15', 1.0, '', '', ''], ['Wait', '', 1.0, '', '', '']]
-G.Actions[1]=[['Set', 'KL30', 0.0, '', '', ''], ['Wait', '', 1.0, '', '', '']]
-G.Actions[2]=[['Set', 'KL15', 1.0, '', '', ''], ['Wait', '', 1.0, '', '', '']]
-
-
-G.Actions[0]=[["Set", "KL30",1, "","Set KL30 to 1", ""],["Set","KL15",1, "","Set KL15 to 1", ""],["Wait","",3,"","Wait for 3 secs", ""]]
-G.Actions[1]=[["Set", "HVDC",380,"V","Set HVDC to 380",""],["Set","MO_EM1_SollModus",0,"","Set Mo_EM1 Sollmodus to 0",""],["Wait","",6,"Wait for 6 secs", ""]]
-G.Actions[2]=[["Set","MO_EM1_SollModus",1,"","Set Mo_EM1Sollmodus to 1",""],["Ramp","SOLLMOMENT",[0,100,20],"Nm","Ramp Sollmoment from 0 to 100 in 20",1],["Wait","",3,"Wait for 3 secs", ""]]
-G.Actions[3]=[["Set","MO_EM1_SollModus",0,"","Set Mo_EM1Sollmodus to 0",""],["Set", "KL15",0,"","Set KL15 to 0", ""],["Wait","",3,"","Wait for 3 secs", ""]]
-G.Actions[4]=[["Set","SOLLMOMENT",-100,"Nm","set sollmoment to -100",""],["Wait","",1,"","Wait for 1 secs", ""]]
-'''
 
 '''Find_Signal_Params function is used to find units, names of G.Signals and indices of G.Signals in G.Actions'''
 def Find_Signal_Params():
