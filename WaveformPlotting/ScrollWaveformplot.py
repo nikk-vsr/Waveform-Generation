@@ -1,4 +1,5 @@
 import matplotlib
+import warnings
 # Make sure that we are using QT5
 matplotlib.use('Qt5Agg')                    # backend for matplotlib
 from PyQt5 import QtWidgets                 # to get the GUI components widget is imported
@@ -110,15 +111,20 @@ def list_WaitSignals(a,b):
     tempo=[]
     tempo_ramp=[]
 
-
     for n in range(b,len(G.Actions[a])):
         if G.Actions[a][n][0]== "Wait":
  
             tempo.append(G.Actions[a][n][2])
         if G.Actions[a][n][0]=="Ramp":
-            for j in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],G.Actions[a][n][2][2]):
-               tempo_ramp.append(G.Actions[a][n][5])
-            tempo.append(tempo_ramp)   
+            if (G.Actions[a][n][2][0] <G.Actions[a][n][2][1]):                       # for ramp up 
+                for j in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],G.Actions[a][n][2][2]):
+                   tempo_ramp.append(G.Actions[a][n][5])
+                tempo.append(tempo_ramp)
+            else:                                                                    #for ramp down
+                for k in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],-G.Actions[a][n][2][2]):
+                    tempo_ramp.append(G.Actions[a][n][5])
+                tempo.append(tempo_ramp)
+   
     if len(tempo)>1:
         return tempo
     else:
@@ -221,6 +227,7 @@ def Waveform_Gen():
             G.LC[j]= LineCollection(G.Concetanated_Segments[j], linewidth=2,colors=G.Color_Index[j])
             ax[j].add_collection(G.LC[j])
             ax[j].autoscale()
+            ax[j].margins(x=0)
             ax[j].set_xlabel('time(s)',fontsize=8)
             ax[j].set_ylabel(G.Signal_Names[j]+ "  "+ (G.Signal_Units[j]),fontsize=8)
             plt.sca(ax[j])                                                        #setting current axes
