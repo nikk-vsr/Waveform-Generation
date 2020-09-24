@@ -1,7 +1,7 @@
 import subplotsWaveform
 #import ScrollWaveformPlot
 
-#Sample inputdata is given, so you can selet any of these to check
+#Sample inputdata dummy data is given, so you can selet any of these to test
 
 #inputdata=[[['Set', 'KL30', 0.0, '', 'Set KL15 to 0', ''], ['Wait', '', 3.0, 's', 'Wait for 3 Sec', ''], ['Set', 'KL15', 1.0, '', 'Set KL15 to 1', ''], ['Wait', '', 3.0, 's', 'Wait for 3 Sec', '']], [['Set', 'KL15', 1.0, '', 'Set KL15 to 1', ''], ['Wait', '', 3.0, 's', 'Wait for 3 Second', ''], ['Set', 'MO_EM2_Sollmodus_Switch', 1.0, '', 'Set MO_EM2_Sollmodus_Switch to 1', ''], ['Wait', '', 0.1, 's', 'Wait for 0.1 sec', ''], ['Set', 'MO_EM2_Sollmodus', 1.0, '', 'Set MO_EM2_Sollmodus to 1', ''], ['Ramp', 'HV_Bench_Battery_Voltage.abc', '700,750,10', '', '', 0.2]], [['Set', 'TME_EM2_IstVolumenstrom', 10.0, '', 'Set TME_EM2_IstVolumenstrom to 10 ', ''], ['Wait', '', 2.0, 's', 'Wait for 2 second', ''], ['Set', 'TME_EM2_IstVolumenstrom', 50.0, '', 'Set TME_EM2_IstVolumenstrom to 50', ''], ['Wait', '', 2.0, 's', 'Wait for 2 second', '']]]
 '''
