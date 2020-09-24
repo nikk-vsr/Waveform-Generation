@@ -1,4 +1,5 @@
 
+
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 from matplotlib.colors import ListedColormap, BoundaryNorm
@@ -97,8 +98,6 @@ def Signal_PendingWait():
         if temp_var !=0 :
             G.SignalPendingWait[i]=G.list_Wait[-temp_var:]                  # latest update
 
-   
-
 #--------------------------------------------------------------------------------------------------------------------------
 '''stores wait time leftover in the same action'''          
 def list_WaitSignals(a,b):                                
@@ -111,9 +110,15 @@ def list_WaitSignals(a,b):
  
             tempo.append(G.Actions[a][n][2])
         if G.Actions[a][n][0]=="Ramp":
-            for j in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],G.Actions[a][n][2][2]):
-               tempo_ramp.append(G.Actions[a][n][5])
-            tempo.append(tempo_ramp)   
+            if (G.Actions[a][n][2][0] <G.Actions[a][n][2][1]):                       # for ramp up 
+                for j in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],G.Actions[a][n][2][2]):
+                   tempo_ramp.append(G.Actions[a][n][5])
+                tempo.append(tempo_ramp)
+            else:                                                                    #for ramp down
+                for k in range(G.Actions[a][n][2][0],G.Actions[a][n][2][1],-G.Actions[a][n][2][2]):
+                    tempo_ramp.append(G.Actions[a][n][5])
+                tempo.append(tempo_ramp)
+                    
     if len(tempo)>1:
         return tempo
     else:
@@ -128,7 +133,7 @@ def Same_ActionWait():
             G.SignalPendingWait[k]= [list_WaitSignals(G.SignalAction[k][0][0],G.SignalAction[k][0][1])]                   # if same action wait is [[3,1],[3,1],[3,1]]'''
         else:
             G.SignalPendingWait[k].insert(0, list_WaitSignals(G.SignalAction[k][0][0],G.SignalAction[k][0][1]))           #inserts pending wait in the same action
-                                                                                                                #net wait would be [[[3,1],[3,1],[3,1]],[3,1],[3,1],[3,1]]  
+                                                                                                                          #net wait would be [[[3,1],[3,1],[3,1]],[3,1],[3,1],[3,1]]  
 #-----------------------------------------------------------------------------------------------------------------------------------    
  
 def Color_Indexing():
@@ -148,7 +153,6 @@ def Color_Indexing():
                     G.Color_Index[m].append(Colors_List[firstindex])
                     
             firstindex=firstindex+1
-   
 #-----------------------------------------------------------------------------------------------------------------------------------
 
 '''subplot dimensions defintion'''
@@ -192,10 +196,7 @@ def Waveform_Gen():
     #global Colors_List
     global fig
     global ax
-    #try:
     fig,ax= plt.subplots(G.Grid_Row,G.Grid_Col,constrained_layout=True) # constrainedlayout == true ensures no overlappnig in the plot and uses complete space in figure
-    #except UserWarning:
-     #   print("caught")
     warnings.simplefilter("ignore")                      
     fig.suptitle(ATP_name+"_"+ TestCase_No, fontsize=8,fontweight="bold")        # remove this line     
     for j in range(0,G.Grid_Row):
@@ -210,6 +211,7 @@ def Waveform_Gen():
                 ax.add_collection(G.LC[j][k])
                 ax.autoscale()
                 ax.set_xlabel('time(s)',fontsize=8)
+                ax.margins(x=0)
                 ax.set_ylabel(G.Signal_Names[j]+ "  "+ (G.Signal_Units[j]),fontsize=8)
                 plt.sca(ax) 
             elif G.No_Signals>1 and G.No_Signals<5 :
@@ -218,19 +220,21 @@ def Waveform_Gen():
                 ax[j].add_collection(G.LC[j][k])
                 ax[j].autoscale()
                 ax[j].set_xlabel('time(s)',fontsize=8)
+                ax[j].margins(x=0)
                 ax[j].set_ylabel(G.Signal_Names[j][k]+ "  "+ (G.Signal_Units[j][k]),fontsize=8)
                 plt.sca(ax[j])                                                        #setting current axes
             else:
                 G.LC[j][k] = LineCollection(G.Concetanated_Segments[j][k], linewidth=2,colors=G.Color_Index[j][k])
                 ax[j][k].add_collection(G.LC[j][k])
                 ax[j][k].autoscale()
+                ax[j][k].margins(x=0)
                 ax[j][k].set_xlabel('time(s)',fontsize=8)
                 ax[j][k].set_ylabel(G.Signal_Names[j][k]+ "  "+ (G.Signal_Units[j][k]),fontsize=8)
                 plt.sca(ax[j][k])                                                        #setting current axes
 
             ''' to add yticks of ramp '''                                           # can add text over ramp value as well using plt.text()
             justify= G.Signal_Names[j][k] not in list(G.Ramp_Signal_yticks.keys())
-
+            
             if justify ==False:
                
                 ExtraTicks=G.Ramp_Signal_yticks[G.Signal_Names[j][k]]
